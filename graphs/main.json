@@ -8,6 +8,17 @@
     "inports": {},
     "outports": {},
     "groups": [],
-    "processes": {},
+    "processes": {
+        "core/Output_vw337": {
+            "component": "core/Output",
+            "metadata": {
+                "label": "core/Output",
+                "x": 487.1728045325779,
+                "y": 76.79320113314448,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
     "connections": []
 }
