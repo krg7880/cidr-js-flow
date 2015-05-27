@@ -1,0 +1,25 @@
+{
+  "name": "cidr-js-flow",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krg7880/cidr-js-flow.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "noflo": "^0.5.13",
+    "noflo-core": "^0.1.13",
+    "noflo-nodejs": "0.0.6",
+    "noflo-filesystem": "1.0.6",
+    "bluebird": "^2.9.21",
+    "ip-subnet-calculator": "^1.0.2",
+    "line-by-line": "^0.1.3",
+    "phpjs": "^1.3.2"
+  },
+  "devDependencies": {}
+}
