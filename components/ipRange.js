@@ -16,6 +16,7 @@ exports.getComponent = function () {
     }
     
     if ((payload.indexOf('/')) < 0) {
+      console.log('Sending out out');
       return c.outPorts.out.send(new Error('Invalid ips'));
     }
     
@@ -24,6 +25,7 @@ exports.getComponent = function () {
     var parts = payload.split('/');
     
     if (parts[1] > 32) {
+      console.log('Sending out out');
       return c.outPorts.out.send(new Error('Invalid ip'));
     }
     
@@ -31,6 +33,7 @@ exports.getComponent = function () {
     range.end = long2ip((ip2long(parts[0])) + math.pow(2, (32 - +parts[1])) - 1); 
     
     // Do something with the packet, then
+    console.log('Sending out out 3');
     c.outPorts.out.send(range);
   });
   c.outPorts.add('out');

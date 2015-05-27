@@ -13,8 +13,8 @@
             "component": "cidr-js-flo/ipRange",
             "metadata": {
                 "label": "cidr-js-flo/ipRange",
-                "x": 334,
-                "y": 100,
+                "x": 36,
+                "y": 36,
                 "width": 72,
                 "height": 72
             }
@@ -23,8 +23,8 @@
             "component": "core/Output",
             "metadata": {
                 "label": "core/Output",
-                "x": 576,
-                "y": 108,
+                "x": 144,
+                "y": 36,
                 "width": 72,
                 "height": 72
             }
