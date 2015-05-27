@@ -41,14 +41,20 @@
                 "port": "in"
             },
             "metadata": {
-                "route": 9
+                "route": 4
             }
         },
         {
-            "data": "[]",
-            "tgt": {
+            "src": {
                 "process": "cidr-js-flo/ipRange_rtl54",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "core/Output_9iuvf",
                 "port": "in"
+            },
+            "metadata": {
+                "route": 10
             }
         }
     ]

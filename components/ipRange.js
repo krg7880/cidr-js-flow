@@ -1,28 +1,32 @@
 var long2ip = require('long2ip');
-var noflo = require("noflo");
+var noflo = require('noflo');
+var _Component = noflo.Component;
+var util = require('util');
 
-/**
- * Returns the IP range (start & end)
- * for a given IP/CIDR
- * @param ip
- * @returns {Object}
- */
-exports.getComponent = function() {
-  var component = new noflo.Component();
-  component.description = "Filters the given IP into CIDR blocks";
+var Component = function() {
+  if (!(this instanceof Component)) {
+    return new Component();
+  }
 
-  component.inPorts = {
-    in: new noflo.Port('array')
-  };
+  _Component.call(this);
 
-  component.outPorts = {
-    out: new noflo.Port('array'),
-    error: new noflo.Port('object')
-  };
+  this.inPorts = new noflo.InPorts({
+    in: {
+      datatype: 'array',
+      description: 'array of IPs to generate CIDR blocks'
+    }
+  });
 
-  component.inPorts.in.on('data', function(payload) {
+  this.outPorts = new noflo.OutPorts({
+    out: {
+      datatype: 'object',
+      description: 'Object of CIDR blocks'
+    }
+  });
+
+  this.inPorts.in.on('data', function(payload) {
     if ((payload.indexOf('/')) < 0) {
-      return component.outPorts.out.send(new Error('Invalid ips'));
+      return this.outPorts.error.send(new Error('Invalid ips'));
     }
 
     var range = {};
@@ -30,13 +34,17 @@ exports.getComponent = function() {
     var parts = payload.split('/');
 
     if (parts[1] > 32) {
-      return component.outPorts.out.send(new Error('Invalid ip'));
+      return this.outPorts.error.send(new Error('Invalid ip'));
     }
 
     range.start = long2ip((ip2long(parts[0])) & ((-1 << (32 - +parts[1]))));
     range.end = long2ip((ip2long(parts[0])) + math.pow(2, (32 - +parts[1])) - 1);
-    return component.outPorts.out.send(payload);
-  });
+    return this.outPorts.out.send(payload);
+  }.bind(this));
+};
 
-  return component; // Return new instance
+util.inherits(Component, _Component);
+
+exports.getComponent = function() {
+  return new Component();
 };
