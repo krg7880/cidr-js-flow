@@ -1,4 +1,5 @@
 var noflo = require('noflo');
+var long2ip = require('long2ip');
 
 /**
  * Returns the IP range (start & end)
@@ -15,7 +16,7 @@ exports.getComponent = function () {
     }
     
     if ((payload.indexOf('/')) < 0) {
-      return c.outPorts.error.send(new Error('Invalid ips'));
+      return c.outPorts.out.send(new Error('Invalid ips'));
     }
     
     var range = {};
@@ -23,7 +24,7 @@ exports.getComponent = function () {
     var parts = payload.split('/');
     
     if (parts[1] > 32) {
-      return c.outPorts.error.send(new Error('Invalid ip'));
+      return c.outPorts.out.send(new Error('Invalid ip'));
     }
     
     range.start = long2ip((ip2long(parts[0])) & ((-1 << (32 - +parts[1]))));
