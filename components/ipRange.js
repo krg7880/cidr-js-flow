@@ -16,12 +16,13 @@ exports.getComponent = function() {
   };
 
   component.outPorts = {
-    out: new noflo.Port('array')
+    out: new noflo.Port('array'),
+    error: new noflo.Port('object')
   };
 
   component.inPorts.in.on('data', function(payload) {
     if ((payload.indexOf('/')) < 0) {
-      return component.outPorts.error.send(new Error('Invalid ips'));
+      return component.outPorts.out.send(new Error('Invalid ips'));
     }
 
     var range = {};
@@ -29,7 +30,7 @@ exports.getComponent = function() {
     var parts = payload.split('/');
 
     if (parts[1] > 32) {
-      return component.outPorts.error.send(new Error('Invalid ip'));
+      return component.outPorts.out.send(new Error('Invalid ip'));
     }
 
     range.start = long2ip((ip2long(parts[0])) & ((-1 << (32 - +parts[1]))));
